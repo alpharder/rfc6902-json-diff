@@ -1,6 +1,6 @@
 import { diffObjects } from "./diff-objects";
 import { diffArrays } from "./diff-arrays";
-import type { RFC6902, CompareFunc } from "../types";
+import type { RFC6902, CompareFunc } from "../types/index";
 
 export function diffUnknownValues(
   leftVal: unknown,

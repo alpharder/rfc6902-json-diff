@@ -1,6 +1,6 @@
 import test from "ava";
 
-import { compare } from "../lib";
+import { compare } from "../lib/index";
 import { DiffTestCase, allCases } from "./_diff-test-data";
 import { applyPatch as fastJsonPatchApplyPatch } from "fast-json-patch";
 import { cloneDeep } from "lodash";

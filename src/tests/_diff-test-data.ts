@@ -12979,319 +12979,318 @@ export const realWorldLargeDocumentCases: DiffTestCase[] = [
   },
 ];
 
-const detectMoveOperationCases: DiffTestCase[] = [
-  // {
-  //   left: [
-  //     {
-  //       slug: "EssentialElements\\Heading",
-  //       properties: {
-  //         content: {
-  //           content: {
-  //             text: "McWay Falls",
-  //           },
-  //         },
-  //       },
-  //       children: [],
-  //     },
-  //     {
-  //       slug: "EssentialElements\\Text",
-  //       properties: {
-  //         content: {
-  //           content: {
-  //             text: "McWay Falls is an 80-foot-tall waterfall on the coast of Big Sur in central California that flows year-round from McWay Creek in Julia Pfeiffer Burns State Park, about 37 miles south of Carmel, into the Pacific Ocean. During high tide, it is a tidefall, a waterfall that empties directly into the ocean",
-  //           },
-  //         },
-  //         design: {
-  //           spacing: {
-  //             margin_bottom: null,
-  //             margin_top: null,
-  //           },
-  //         },
-  //       },
-  //       children: [],
-  //     },
-  //     {
-  //       slug: "EssentialElements\\Image",
-  //       properties: {
-  //         content: {
-  //           content: {
-  //             image: {
-  //               id: -1,
-  //               type: "external_image",
-  //               url: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-  //               alt: "",
-  //               caption: "",
-  //             },
-  //           },
-  //         },
-  //       },
-  //       children: [],
-  //     },
-  //   ],
-  //   right: [
-  //     {
-  //       slug: "EssentialElements\\Heading",
-  //       properties: {
-  //         content: {
-  //           content: {
-  //             text: "McWay Falls",
-  //           },
-  //         },
-  //       },
-  //       children: [],
-  //     },
-  //     {
-  //       slug: "EssentialElements\\Image",
-  //       properties: {
-  //         content: {
-  //           content: {
-  //             image: {
-  //               id: -1,
-  //               type: "external_image",
-  //               url: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-  //               alt: "",
-  //               caption: "",
-  //             },
-  //           },
-  //         },
-  //       },
-  //       children: [],
-  //     },
-  //     {
-  //       slug: "EssentialElements\\Text",
-  //       properties: {
-  //         content: {
-  //           content: {
-  //             text: "McWay Falls is an 80-foot-tall waterfall on the coast of Big Sur in central California that flows year-round from McWay Creek in Julia Pfeiffer Burns State Park, about 37 miles south of Carmel, into the Pacific Ocean. During high tide, it is a tidefall, a waterfall that empties directly into the ocean",
-  //           },
-  //         },
-  //         design: {
-  //           spacing: {
-  //             margin_bottom: null,
-  //             margin_top: null,
-  //           },
-  //         },
-  //       },
-  //       children: [],
-  //     },
-  //   ],
-  //   expected: [
-  //     {
-  //       op: "move",
-  //       path: "/2",
-  //       from: "/1",
-  //     },
-  //   ],
-  //   title: "Real-world move detection #1",
-  //   detectMoveOperations: true,
-  // },
-  // {
-  //   // only: true,
-  //   left: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  //
-  //   // add "A"
-  //   // replace 1 with "R"
-  //   // transpose "6" and "5"
-  //   right: ["A", "R", 2, 3, 4, 6, 5, 7, 8, 9, 10],
-  //   expected: [
-  //     {
-  //       op: "replace",
-  //       path: "/0",
-  //       value: "A",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/1",
-  //       value: "R",
-  //     },
-  //     {
-  //       from: "/6",
-  //       op: "move",
-  //       path: "/5",
-  //     },
-  //   ],
-  //   title: "Move detection: #1",
-  //   detectMoveOperations: true,
-  // },
-  //
-  // {
-  //   left: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  //   right: ["A", "R", 2, 3, 4, 6, 5, 7, 8, 9, 10],
-  //   expected: [
-  //     {
-  //       op: "replace",
-  //       path: "/0",
-  //       value: "A",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/1",
-  //       value: "R",
-  //     },
-  //     {
-  //       op: "remove",
-  //       path: "/5",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/6",
-  //       value: 5,
-  //     },
-  //   ],
-  //   title: "Move detection candidate with move detection disabled",
-  //   detectMoveOperations: false,
-  // },
-  // {
-  //   left: [1, 2, 3, 4],
-  //   right: [1, 3, 2, 4],
-  //   expected: [
-  //     {
-  //       op: "move",
-  //       from: "/2",
-  //       path: "/1",
-  //     },
-  //   ],
-  //   title: "Move detection: #2",
-  //   detectMoveOperations: true,
-  // },
-  //
-  // {
-  //   left: [{ a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }],
-  //   right: [{ d: 40 }, { a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }],
-  //   expected: [
-  //     {
-  //       op: "add",
-  //       path: "/0",
-  //       value: {
-  //         d: 40,
-  //       },
-  //     },
-  //   ],
-  //   title: "Move detection: Fake object move",
-  //   detectMoveOperations: true,
-  // },
-  // {
-  //   left: [{ a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }],
-  //   right: [{ d: 40 }, { a: 10 }, { b: 20 }, { c: 30 }],
-  //   expected: [
-  //     {
-  //       op: "move",
-  //       path: "/0",
-  //       from: "/3",
-  //     },
-  //   ],
-  //   title: "Move detection: Move last arr element to first",
-  //   detectMoveOperations: true,
-  // },
-  // {
-  //   left: [{ a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }],
-  //   right: [{ a: 10 }, { b: 20 }, { d: 40 }, { c: 30 }],
-  //   expected: [
-  //     {
-  //       op: "move",
-  //       path: "/3",
-  //       from: "/2",
-  //     },
-  //   ],
-  //   title: "Move detection: Swap last two elements",
-  //   detectMoveOperations: true,
-  // },
-  // {
-  //   left: [1, 2, 3, 4, 5, 6, 7],
-  //   right: [7, 1, "b", 2, 3, 4, 5, 6, 7, "a"],
-  //   expected: [
-  //     {
-  //       op: "add",
-  //       path: "/0",
-  //       value: 7,
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/2",
-  //       value: "b",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/9",
-  //       value: "a",
-  //     },
-  //   ],
-  //   title: "Move detection: One more fake move",
-  //   detectMoveOperations: true,
-  // },
-  // {
-  //   left: [1, 2, 3, 4, 5, 6, 7],
-  //   right: [7, 1, "b", 2, 3, 4, 5, 6, "a"],
-  //   expected: [
-  //     {
-  //       op: "move",
-  //       path: "/0",
-  //       from: "/6",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/2",
-  //       value: "b",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/8",
-  //       value: "a",
-  //     },
-  //   ],
-  //   title: "Move detection: Move and adds",
-  //   detectMoveOperations: true,
-  // },
-  //
-  // {
-  //   only: true,
-  //   left: [1, 2, 3, 4, 5, 6, 7],
-  //   right: ["q", "q", "q", 7, 1, "b", 2, 3, 4, 5, 6, "w", "y", "d"],
-  //   expected: [
-  //     {
-  //       op: "add",
-  //       path: "/0",
-  //       value: "q",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/1",
-  //       value: "q",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/2",
-  //       value: "q",
-  //     },
-  //     {
-  //       op: "move",
-  //       path: "/3",
-  //       from: "/9",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/5",
-  //       value: "b",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/11",
-  //       value: "w",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/12",
-  //       value: "y",
-  //     },
-  //     {
-  //       op: "add",
-  //       path: "/13",
-  //       value: "d",
-  //     },
-  //   ],
-  //   title: "Move detection: Move and more adds",
-  //   detectMoveOperations: true,
-  // },
+export const detectMoveOperationCases: DiffTestCase[] = [
+  {
+    left: [
+      {
+        slug: "EssentialElements\\Heading",
+        properties: {
+          content: {
+            content: {
+              text: "McWay Falls",
+            },
+          },
+        },
+        children: [],
+      },
+      {
+        slug: "EssentialElements\\Text",
+        properties: {
+          content: {
+            content: {
+              text: "McWay Falls is an 80-foot-tall waterfall on the coast of Big Sur in central California that flows year-round from McWay Creek in Julia Pfeiffer Burns State Park, about 37 miles south of Carmel, into the Pacific Ocean. During high tide, it is a tidefall, a waterfall that empties directly into the ocean",
+            },
+          },
+          design: {
+            spacing: {
+              margin_bottom: null,
+              margin_top: null,
+            },
+          },
+        },
+        children: [],
+      },
+      {
+        slug: "EssentialElements\\Image",
+        properties: {
+          content: {
+            content: {
+              image: {
+                id: -1,
+                type: "external_image",
+                url: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+                alt: "",
+                caption: "",
+              },
+            },
+          },
+        },
+        children: [],
+      },
+    ],
+    right: [
+      {
+        slug: "EssentialElements\\Heading",
+        properties: {
+          content: {
+            content: {
+              text: "McWay Falls",
+            },
+          },
+        },
+        children: [],
+      },
+      {
+        slug: "EssentialElements\\Image",
+        properties: {
+          content: {
+            content: {
+              image: {
+                id: -1,
+                type: "external_image",
+                url: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+                alt: "",
+                caption: "",
+              },
+            },
+          },
+        },
+        children: [],
+      },
+      {
+        slug: "EssentialElements\\Text",
+        properties: {
+          content: {
+            content: {
+              text: "McWay Falls is an 80-foot-tall waterfall on the coast of Big Sur in central California that flows year-round from McWay Creek in Julia Pfeiffer Burns State Park, about 37 miles south of Carmel, into the Pacific Ocean. During high tide, it is a tidefall, a waterfall that empties directly into the ocean",
+            },
+          },
+          design: {
+            spacing: {
+              margin_bottom: null,
+              margin_top: null,
+            },
+          },
+        },
+        children: [],
+      },
+    ],
+    expected: [
+      {
+        op: "move",
+        path: "/2",
+        from: "/1",
+      },
+    ],
+    title: "Real-world move detection #1",
+    detectMoveOperations: true,
+  },
+  {
+    // only: true,
+    left: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  
+    // add "A"
+    // replace 1 with "R"
+    // transpose "6" and "5"
+    right: ["A", "R", 2, 3, 4, 6, 5, 7, 8, 9, 10],
+    expected: [
+      {
+        op: "replace",
+        path: "/0",
+        value: "A",
+      },
+      {
+        op: "add",
+        path: "/1",
+        value: "R",
+      },
+      {
+        op: "move",
+        path: "/6",
+        from: "/5",
+      },
+    ],
+    title: "Move detection: #1",
+    detectMoveOperations: true,
+  },
+  
+  {
+    left: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    right: ["A", "R", 2, 3, 4, 6, 5, 7, 8, 9, 10],
+    expected: [
+      {
+        op: "replace",
+        path: "/0",
+        value: "A",
+      },
+      {
+        op: "add",
+        path: "/1",
+        value: "R",
+      },
+      {
+        op: "remove",
+        path: "/5",
+      },
+      {
+        op: "add",
+        path: "/6",
+        value: 5,
+      },
+    ],
+    title: "Move detection candidate with move detection disabled",
+    detectMoveOperations: false,
+  },
+  {
+    left: [1, 2, 3, 4],
+    right: [1, 3, 2, 4],
+    expected: [
+      {
+        op: "move",
+        path: "/2",
+        from: "/1",
+      },
+    ],
+    title: "Move detection: #2",
+    detectMoveOperations: true,
+  },
+  
+  {
+    left: [{ a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }],
+    right: [{ d: 40 }, { a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }],
+    expected: [
+      {
+        op: "add",
+        path: "/0",
+        value: {
+          d: 40,
+        },
+      },
+    ],
+    title: "Move detection: Fake object move",
+    detectMoveOperations: true,
+  },
+  {
+    left: [{ a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }],
+    right: [{ d: 40 }, { a: 10 }, { b: 20 }, { c: 30 }],
+    expected: [
+      {
+        op: "move",
+        path: "/0",
+        from: "/3",
+      },
+    ],
+    title: "Move detection: Move last arr element to first",
+    detectMoveOperations: true,
+  },
+  {
+    left: [{ a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }],
+    right: [{ a: 10 }, { b: 20 }, { d: 40 }, { c: 30 }],
+    expected: [
+      {
+        op: "move",
+        path: "/3",
+        from: "/2",
+      },
+    ],
+    title: "Move detection: Swap last two elements",
+    detectMoveOperations: true,
+  },
+  {
+    left: [1, 2, 3, 4, 5, 6, 7],
+    right: [7, 1, "b", 2, 3, 4, 5, 6, 7, "a"],
+    expected: [
+      {
+        op: "add",
+        path: "/0",
+        value: 7,
+      },
+      {
+        op: "add",
+        path: "/2",
+        value: "b",
+      },
+      {
+        op: "add",
+        path: "/9",
+        value: "a",
+      },
+    ],
+    title: "Move detection: One more fake move",
+    detectMoveOperations: true,
+  },
+  {
+    left: [1, 2, 3, 4, 5, 6, 7],
+    right: [7, 1, "b", 2, 3, 4, 5, 6, "a"],
+    expected: [
+      {
+        op: "add",
+        path: "/0",
+        value: 7,
+      },
+      {
+        op: "add",
+        path: "/2",
+        value: "b",
+      },
+      {
+        op: "replace",
+        path: "/8",
+        value: "a",
+      },
+    ],
+    title: "Move detection: Move and adds",
+    detectMoveOperations: true,
+  },
+  
+  {
+    left: [1, 2, 3, 4, 5, 6, 7],
+    right: ["q", "q", "q", 7, 1, "b", 2, 3, 4, 5, 6, "w", "y", "d"],
+    expected: [
+      {
+        op: "add",
+        path: "/0",
+        value: "q",
+      },
+      {
+        op: "add",
+        path: "/1",
+        value: "q",
+      },
+      {
+        op: "add",
+        path: "/2",
+        value: "q",
+      },
+      {
+        op: "add",
+        path: "/3",
+        value: 7,
+      },
+      {
+        op: "add",
+        path: "/5",
+        value: "b",
+      },
+      {
+        op: "replace",
+        path: "/11",
+        value: "w",
+      },
+      {
+        op: "add",
+        path: "/12",
+        value: "y",
+      },
+      {
+        op: "add",
+        path: "/13",
+        value: "d",
+      },
+    ],
+    title: "Move detection: Move and more adds",
+    detectMoveOperations: true,
+  },
 ];
 
 export const allCases: DiffTestCase[] = [

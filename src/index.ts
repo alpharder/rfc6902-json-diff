@@ -1,2 +1,2 @@
-export * from "./types";
-export * from "./lib";
+export * from "./types/index";
+export * from "./lib/index";

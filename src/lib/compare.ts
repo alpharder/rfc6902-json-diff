@@ -3,7 +3,7 @@ import type {
   CompareFunc,
   CompareOptions,
   RFC6902,
-} from "../types";
+} from "../types/index";
 import { diffUnknownValues } from "./diff-unknown-values";
 import { deepEqual } from "./util/deep-equal";
 

@@ -1,5 +1,6 @@
-import type { ComparableRecord, RFC6902, CompareFunc } from "../types";
+import type { ComparableRecord, RFC6902, CompareFunc } from "../types/index";
 import { diffUnknownValues } from "./diff-unknown-values";
+import { escapePathSegment } from "./util/escape-path-segment";
 
 export function diffObjects(
   leftObj: ComparableRecord,
@@ -22,7 +23,7 @@ export function diffObjects(
       leftVal,
       rightVal,
       compareFunc,
-      `${path}/${leftKey}`,
+      `${path}/${escapePathSegment(leftKey)}`,
       leftKey in rightObj,
       operations
     );
@@ -32,7 +33,7 @@ export function diffObjects(
     if (!(key in leftObj) && rightObj[key] !== undefined) {
       operations.push({
         op: "add",
-        path: `${path}/${key}`,
+        path: `${path}/${escapePathSegment(key)}`,
         value: rightObj[key],
       });
     }

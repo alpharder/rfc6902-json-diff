@@ -1,4 +1,4 @@
-import type { ComparableArray, CompareFunc, RFC6902 } from "../types";
+import type { ComparableArray, CompareFunc, RFC6902 } from "../types/index";
 import { diffUnknownValues } from "./diff-unknown-values";
 import { diff } from "./util/fast-myers-diff";
 import type {
@@ -214,10 +214,19 @@ function detectMoveOperations(
         candidateI.type === "remove" ? candidateI : candidateJ
       ) as RemoveOperationCandidate;
 
+      // RFC 6902 move semantics: first remove from `from`, then add at `path`.
+      // When the add candidate (at position j) precedes the remove candidate
+      // (at position i) in the candidate list, the remove's shiftedIdx was
+      // inflated by the add. We must undo that shift so `from` references
+      // the element's position before the move.
+      const addIsBeforeRemove = candidateJ.type === "add";
+      const fromShiftedIdx = addIsBeforeRemove
+        ? removeOperationCandidate.shiftedIdx - 1
+        : removeOperationCandidate.shiftedIdx;
+
       candidates[j] = {
         type: "move",
-        fromShiftedIdx:
-          removeOperationCandidate.shiftedIdx,
+        fromShiftedIdx,
         toShiftedIdx: addOperationCandidate.totalShiftedIdx,
         value: addOperationCandidate.value,
       };

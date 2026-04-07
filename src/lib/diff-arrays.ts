@@ -1,6 +1,6 @@
 import { diffArraysUsingLcs } from "./diff-arrays-using-lcs";
 import { diffUnknownValues } from "./diff-unknown-values";
-import type { RFC6902, CompareFunc } from "../types";
+import type { RFC6902, CompareFunc } from "../types/index";
 
 export function diffArrays(
   leftArr: Array<unknown>,

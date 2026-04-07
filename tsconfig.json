@@ -1,8 +1,10 @@
 {
-  /* Visit https://aka.ms/tsconfig to read more about this file */
   "extends": "@tsconfig/node16-strictest/tsconfig.json",
   "include": ["src/**/*"],
   "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "rootDir": "src",
     "outDir": "dist",
     "noUncheckedIndexedAccess": false,
