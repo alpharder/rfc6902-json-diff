@@ -284,6 +284,7 @@ export function diff<T extends Indexable<unknown>>(
   return diff_core(i, N + 1 - i, i, M + 1 - i, Eq);
 }
 
+
 class LCSGen implements IterableIterator<Vec3> {
   private i = 0;
   private j = 0;

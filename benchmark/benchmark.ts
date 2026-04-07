@@ -14,7 +14,8 @@ import type { DiffTestCase } from "../src/tests/_diff-test-data";
 import pkg from "fast-json-patch";
 const { compare: fastJsonPatchCompare } = pkg;
 import { createPatch } from "rfc6902";
-import { create, formatters } from "jsondiffpatch";
+import { create } from "jsondiffpatch";
+import * as jsonpatchFormatter from "jsondiffpatch/formatters/jsonpatch";
 
 // @ts-ignore
 import Benchmark from "benchmark";
@@ -50,8 +51,7 @@ for (const testSuite of testSuites) {
       createPatch(testSuite.left, testSuite.right);
     })
     .add("jsondiffpatch", () => {
-      // @ts-ignore
-      formatters.jsonpatch.format(
+      jsonpatchFormatter.format(
         jsondiffpatchDiffer.diff(testSuite.left, testSuite.right)
       );
     })

@@ -4,11 +4,11 @@
   "description": "",
   "main": "benchmark.ts",
   "scripts": {
-    "benchmark": "ts-node benchmark.ts"
+    "benchmark": "bun benchmark.ts"
   },
   "dependencies": {
     "benchmark": "^2.1.4",
-    "jsondiffpatch": "^0.4.1",
-    "rfc6902": "^5.0.1"
+    "jsondiffpatch": "^0.7.3",
+    "rfc6902": "^5.2.0"
   }
 }

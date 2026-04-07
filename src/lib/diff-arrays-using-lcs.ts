@@ -1,6 +1,6 @@
 import type { ComparableArray, CompareFunc, RFC6902 } from "../types";
 import { diffUnknownValues } from "./diff-unknown-values";
-import { calcPatch } from "./util/fast-myers-diff";
+import { diff } from "./util/fast-myers-diff";
 import type {
   AddOperationCandidate,
   OperationCandidate,
@@ -17,7 +17,7 @@ export function diffArraysUsingLcs(
 ): void {
   const operationCandidates: OperationCandidate[] = [];
 
-  const fastMyersDiffIterator = calcPatch(leftArr, rightArr, (l, r) =>
+  const fastMyersDiffIterator = diff(leftArr, rightArr, (l, r) =>
     compareFunc(leftArr[l], rightArr[r])
   );
 
@@ -29,7 +29,9 @@ export function diffArraysUsingLcs(
 
   for (const diffEntry of fastMyersDiffIterator) {
     let [deleteStart, deleteEnd] = diffEntry;
-    const [, , insert] = diffEntry;
+    const insertStart = diffEntry[2];
+    const insertEnd = diffEntry[3];
+    const insertLen = insertEnd - insertStart;
 
     const sourceArrayRemovalBatchStartIdx = deleteStart;
 
@@ -50,7 +52,7 @@ export function diffArraysUsingLcs(
       deletePos < deleteEnd;
       i++, deletePos++
     ) {
-      if (insert[i] === undefined) {
+      if (i >= insertLen) {
         // pure removal
         operationCandidates.push({
           type: "remove",
@@ -63,7 +65,7 @@ export function diffArraysUsingLcs(
         // replace
         operationCandidates.push({
           type: "replace",
-          value: insert[i],
+          value: rightArr[insertStart + i],
           shiftedIdx: deletePos,
           removedValue: leftArr[sourceArrayRemovalBatchStartIdx + i],
         });
@@ -71,10 +73,10 @@ export function diffArraysUsingLcs(
       }
     }
 
-    for (let i = insertIdxShift; i < insert.length; i++) {
+    for (let i = insertIdxShift; i < insertLen; i++) {
       operationCandidates.push({
         type: "add",
-        value: insert[i],
+        value: rightArr[insertStart + i],
         totalShiftedIdx: deleteStart + i,
       });
       batchAdditionsCount++;
@@ -212,20 +214,9 @@ function detectMoveOperations(
         candidateI.type === "remove" ? candidateI : candidateJ
       ) as RemoveOperationCandidate;
 
-      // const candidateJTotalIndexShift =
-      //   candidateJ.indexShifts.additionsIdxShift -
-      //   candidateJ.indexShifts.removalsIdxShift;
-      //
-      // const fromIdxShift =
-      //   candidateITotalIndexShift - candidateJTotalIndexShift;
-
       candidates[j] = {
         type: "move",
         fromShiftedIdx:
-          // removeOperationCandidate.totalShiftedIdx >
-          // addOperationCandidate.totalShiftedIdx
-          //   ? removeOperationCandidate.totalShiftedIdx - fromIdxShift
-          //   :
           removeOperationCandidate.shiftedIdx,
         toShiftedIdx: addOperationCandidate.totalShiftedIdx,
         value: addOperationCandidate.value,
